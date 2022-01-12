@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="primary">
+  <ion-menu-button slot="start"></ion-menu-button>
+  <ion-title>contacts</ion-title>
+  </ion-toolbar>
+ </ion-header>
+ <ion-content padding text-center>
+  <ion-item-divider>
+  <ion-input placeholder="Nom" [(ngModel)]="nomModel"></ion-input>
+  <ion-input type="number" placeholder="Téléphone" [(ngModel)]="telModel">
+  </ion-input>
+  <ng-container *ngIf="modeModif">
+  <ion-button expand="block" (click)="modifier()">
+  Modifier
+  </ion-button>
+  </ng-container>
+  <ng-container *ngIf="!modeModif">
+  <ion-button expand="block" (click)="inserer()">
+  Insérer
+  </ion-button>
+  </ng-container>
+  </ion-item-divider>
+  <ion-grid>
+  <ion-row *ngIf="TabContacts.length">
+  <ion-col>
+  ID
+  </ion-col>
+  <ion-col>
+  Nom
+  </ion-col>
+  <ion-col>
+  Tel
+  </ion-col>
+  <ion-col size="4" align="center">
+  Action
+  </ion-col>
+  </ion-row>
+  <ion-row *ngFor="let c of TabContacts">
+  <ion-col>
+  {{c.id}}
+  </ion-col>
+  <ion-col>
+  {{c.nom}}
+  </ion-col>
+  <ion-col>
+  {{c.tel}}
+  </ion-col>
+  <ion-col size="4">
+  <ion-button (click)="supprimer(c)" size="small" color="danger">
+  <ion-icon name="trash"></ion-icon>
+  </ion-button>
+  <ion-button (click)="activerModif(c)" size="small" color="warning">
+  <ion-icon name="create"></ion-icon>
+  </ion-button>
+  </ion-col>
+  </ion-row>
+  </ion-grid>
+ </ion-content>

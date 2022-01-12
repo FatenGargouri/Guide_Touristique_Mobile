@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>meteo</ion-title>
+    <ion-menu-button slot="start"></ion-menu-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+    <ion-item>
+    <ion-label>Ville</ion-label>
+    <ion-input type="=text" [(ngModel)]="ville"></ion-input>
+    <ion-button (click)="chargerMeteo()">OK</ion-button>
+    </ion-item>
+    </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="meteo1jour">
+    <ion-card-content>
+    <ion-item>
+    <ion-label>Ville :&nbsp;<strong>{{meteo1jour.name}}</strong>
+    ,&nbsp;
+    Pays :&nbsp;<strong>{{meteo1jour.sys.country}}</strong></ion-label>
+    </ion-item>
+    <ion-item>
+    <ion-label>Longitude :&nbsp;<strong>{{meteo1jour.coord.lon}}</strong>
+    ,&nbsp;
+    Latitude :&nbsp;<strong>{{meteo1jour.coord.lat}}</strong></ion-label>
+    </ion-item>
+    </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="meteo5jours">
+    <ion-card-content>
+    <ion-list>
+    <ion-item *ngFor="let m of meteo5jours.list">
+    <ion-avatar slot="start">
+    <ion-img src="assets/images/{{m.weather[0].main}}.png">
+    </ion-img>
+    </ion-avatar>
+    <ion-list>
+    <ion-item><strong>{{m.dt * 1000|date:'dd/MM/yyyy HH:mm'}}</strong>
+    </ion-item>
+    <ion-item><strong>Min :&nbsp;{{(m.main.temp_min - 273.15)|number:'2.1'}}, Max
+    :&nbsp;{{(m.main.temp_max - 273.15)|number:'2.1'}}</strong>
+    </ion-item>
+    <ion-item><strong>Etat :&nbsp;{{m.weather[0].description}}</strong>
+    </ion-item>
+    </ion-list>
+    </ion-item>
+    </ion-list>
+    </ion-card-content>
+    </ion-card>
+
+</ion-content>
